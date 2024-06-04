@@ -154,6 +154,12 @@ async def on_member_join(member):
     if channel:
         await channel.send(f"Welcome to {member.guild.name}, {member.mention}!")
 
+@bot.command(name='kick')
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member: discord.Member, *, reason=None):
+    await member.kick(reason=reason)
+    await ctx.send(f'User {member} has been kicked.')
+
 
 @bot.event
 async def on_member_remove(member):
